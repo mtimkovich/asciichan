@@ -1,8 +1,12 @@
 require 'sinatra'
 require_relative 'models'
 
+def get_art
+  Art.all(order: [ :id.desc ], limit: 10)
+end
+
 get '/' do
-  @art = Art.all(order: [ :id.desc ], limit: 10)
+  @art = get_art
   erb :index
 end
 
@@ -17,7 +21,7 @@ post '/' do
     redirect '/'
   else
     @error = "submission must have both title and art"
-    @art = Art.all(order: [ :id.desc ], limit: 10)
+    @art = get_art
 
     erb :index
   end
