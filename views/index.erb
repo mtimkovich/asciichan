@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>/ascii/</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+    <h1>/ascii/</h1>
+
+    <form method="post">
+      <table>
+        <tr>
+          <label>
+            <td>title</td>
+            <td><input type="text" name="title"></td>
+          </label>
+        </tr>
+
+        <br>
+
+        <tr>
+          <label>
+            <td>art</td>
+            <td><textarea name="art"></textarea></td>
+          </label>
+        </tr>
+
+        <br>
+
+        <tr>
+          <td></td>
+          <td>
+            <% if not @error.nil? %>
+              <div id="error"><%= @error %></div>
+            <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><input type="submit"></td>
+        </tr>
+      </table>
+    </form>
+
+    <br>
+
+    <% @art.each do |art| %>
+      <b><%= art.title %></b>
+      <pre><%= art.art %></pre>
+    <% end %>
+  </body>
+</html>
+
