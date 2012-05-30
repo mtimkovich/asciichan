@@ -12,11 +12,9 @@ def get_art(update = false)
     $log.info("DB QUERY")
     art = Art.all(order: [ :id.desc ], limit: 10)
     $CACHE[key] = art
-  else
-    art = $CACHE[key]
   end
 
-  art
+  $CACHE[key]
 end
 
 get '/' do
