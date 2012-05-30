@@ -1,7 +1,12 @@
 require 'sinatra'
+require 'logger'
 require_relative 'models'
 
+
 def get_art
+  log = Logger.new(STDOUT)
+
+  log.info("DB QUERY")
   Art.all(order: [ :id.desc ], limit: 10)
 end
 
