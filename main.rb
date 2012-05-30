@@ -2,12 +2,21 @@ require 'sinatra'
 require 'logger'
 require_relative 'models'
 
+$CACHE = {}
+$log = Logger.new(STDOUT)
 
-def get_art
-  log = Logger.new(STDOUT)
+def get_art(update = false)
+  key = "top"
 
-  log.info("DB QUERY")
-  Art.all(order: [ :id.desc ], limit: 10)
+  if not $CACHE.has_key?(key) or update
+    $log.info("DB QUERY")
+    art = Art.all(order: [ :id.desc ], limit: 10)
+    $CACHE[key] = art
+  else
+    art = $CACHE[key]
+  end
+
+  art
 end
 
 get '/' do
@@ -23,6 +32,7 @@ post '/' do
   )
 
   if a.save
+    get_art(true)
     redirect '/'
   else
     @error = "submission must have both title and art"
