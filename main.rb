@@ -10,7 +10,7 @@ def get_art(update = false)
 
   if not $CACHE.has_key?(key) or update
     $log.info("DB QUERY")
-    art = Art.all(order: [ :id.desc ], limit: 10)
+    art = Art.all(order: [:id.desc], limit: 10)
     $CACHE[key] = art
   end
 
