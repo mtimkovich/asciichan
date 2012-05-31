@@ -6,9 +6,9 @@ class Art
   include DataMapper::Resource
 
   property :id,           Serial
-  property :title,        String,     required:   true
-  property :art,          Text,       required:   true
-  property :created_at,   DateTime,   required:   true
+  property :title,        String,    required:   true
+  property :art,          Text,      required:   true
+  property :created_at,   DateTime,  required:   true
 end
 
 DataMapper.finalize

@@ -9,7 +9,7 @@ def get_art(update = false)
   key = "top"
 
   if not $CACHE.has_key?(key) or update
-    $log.info("DB QUERY")
+    $log.info('DB QUERY')
     art = Art.all(order: [:id.desc], limit: 10)
     $CACHE[key] = art
   end
@@ -24,16 +24,16 @@ end
 
 post '/' do
   a = Art::create(
-    title: params[:title],
-    art: params[:art],
-    created_at: Time.now
+    title:       params[:title],
+    art:         params[:art],
+    created_at:  Time.now
   )
 
   if a.save
     get_art(true)
     redirect '/'
   else
-    @error = "submission must have both title and art"
+    @error = 'submission must have both title and art'
     @art = get_art
 
     erb :index
