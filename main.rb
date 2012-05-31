@@ -1,6 +1,6 @@
-require 'sinatra'
-require 'logger'
-require_relative 'models'
+require "sinatra"
+require "logger"
+require_relative "models"
 
 $CACHE = {}
 $log = Logger.new(STDOUT)
@@ -9,7 +9,7 @@ def get_art(update = false)
   key = "top"
 
   if not $CACHE.has_key?(key) or update
-    $log.info('DB QUERY')
+    $log.info("DB QUERY")
     art = Art.all(order: [:id.desc], limit: 10)
     $CACHE[key] = art
   end
@@ -17,12 +17,12 @@ def get_art(update = false)
   $CACHE[key]
 end
 
-get '/' do
+get "/" do
   @art = get_art
   erb :index
 end
 
-post '/' do
+post "/" do
   a = Art::create(
     title:       params[:title],
     art:         params[:art],
@@ -31,9 +31,9 @@ post '/' do
 
   if a.save
     get_art(true)
-    redirect '/'
+    redirect "/"
   else
-    @error = 'submission must have both title and art'
+    @error = "submission must have both title and art"
     @art = get_art
 
     erb :index

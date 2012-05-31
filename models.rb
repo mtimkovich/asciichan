@@ -1,4 +1,4 @@
-require 'data_mapper'
+require "data_mapper"
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/db/art.db")
 
