@@ -16,14 +16,17 @@ def get_art(update = false)
 end
 
 get "/" do
-  @art = get_art
+  @arts = get_art
   erb :index
 end
 
 post "/" do
+  @title = params[:title]
+  @art = params[:art]
+
   a = Art::create(
-    title:       params[:title],
-    art:         params[:art],
+    title:       @title,
+    art:         @art,
     created_at:  Time.now
   )
 
@@ -32,7 +35,7 @@ post "/" do
     redirect "/"
   else
     @error = "submission must have both title and art"
-    @art = get_art
+    @arts = get_art
 
     erb :index
   end

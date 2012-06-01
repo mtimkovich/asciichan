@@ -13,7 +13,7 @@
         <tr>
           <label>
             <td>title</td>
-            <td><input type="text" name="title"></td>
+            <td><input type="text" name="title" value="<%= @title %>"></td>
           </label>
         </tr>
 
@@ -22,7 +22,7 @@
         <tr>
           <label>
             <td>art</td>
-            <td><textarea name="art"></textarea></td>
+            <td><textarea name="art"><%= @art %></textarea></td>
           </label>
         </tr>
 
@@ -46,7 +46,7 @@
 
     <br>
 
-    <% @art.each do |art| %>
+    <% @arts.each do |art| %>
       <b><%= art.title %></b>
       <pre><%= art.art %></pre>
     <% end %>
