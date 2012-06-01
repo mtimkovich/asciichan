@@ -1,15 +1,13 @@
 require "sinatra"
-require "logger"
 require_relative "models"
 
 $CACHE = {}
-$log = Logger.new(STDOUT)
 
 def get_art(update = false)
   key = "top"
 
   if not $CACHE.has_key?(key) or update
-    $log.info("DB QUERY")
+    logger.info("DB QUERY")
     art = Art.all(order: [:id.desc], limit: 10)
     $CACHE[key] = art
   end
