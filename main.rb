@@ -40,9 +40,14 @@ def get_coords(ip)
   end
 end
 
-get '/' do
+def render_front
   @arts = get_art
+
   erb :index
+end
+
+get '/' do
+  render_front
 end
 
 post '/' do
@@ -63,8 +68,7 @@ post '/' do
     redirect '/'
   else
     @error = 'submission must have both title and art'
-    @arts = get_art
 
-    erb :index
+    render_front
   end
 end
