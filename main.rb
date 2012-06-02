@@ -3,6 +3,7 @@ require 'net/http'
 require 'json'
 
 require_relative 'models'
+require_relative 'helper'
 
 $CACHE = {}
 
@@ -16,28 +17,6 @@ def get_art(update = false)
   end
 
   $CACHE[key]
-end
-
-def get_coords(ip)
-  ip = '12.215.42.19'
-  ip_url = 'http://api.hostip.info/get_json.php?position=true&ip='
-
-  url = ip_url + ip
-
-  begin
-    content = Net::HTTP.get URI.parse(url)
-  rescue SocketError
-    return
-  end
-
-  if content
-    j = JSON.parse(content)
-
-    lat = j['lat']
-    lng = j['lng']
-
-    return "#{lat},#{lng}"
-  end
 end
 
 def render_front
@@ -56,12 +35,15 @@ post '/' do
 
   coords = get_coords(request.ip)
 
-  a = Art::create(
+  a = Art.new(
     title:       @title,
     art:         @art,
-    coords:      coords,
     created_at:  Time.now
   )
+
+  if not coords.nil?
+    a.coords = coords
+  end
 
   if a.save
     get_art(true)
