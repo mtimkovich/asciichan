@@ -1,3 +1,9 @@
+def gmaps_img(points)
+  gmaps_url = 'http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&'
+
+  return gmaps_url + points.map { |p| "markers=#{p}" }.join('&')
+end
+
 def get_coords(ip)
   ip = '8.8.8.8'
   ip_url = 'http://api.hostip.info/get_json.php?position=true&ip='
