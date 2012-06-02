@@ -1,14 +1,15 @@
-require "data_mapper"
+require 'data_mapper'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/db/art.db")
 
 class Art
   include DataMapper::Resource
 
-  property :id,           Serial
-  property :title,        String,    required:   true
-  property :art,          Text,      required:   true
-  property :created_at,   DateTime,  required:   true
+  property :id,         Serial
+  property :title,      String,   required: true
+  property :art,        Text,     required: true
+  property :coords,     String   
+  property :created_at, DateTime, required: true
 end
 
 DataMapper.finalize
