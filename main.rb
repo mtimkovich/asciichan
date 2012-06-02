@@ -21,6 +21,14 @@ end
 
 def render_front
   @arts = get_art
+  
+  points = @arts.map { |a| a.coords }.compact
+  
+  @gmap_img = nil
+
+  if not points.empty?
+    @gmap_img = get_gmaps_img(points)
+  end
 
   erb :index
 end

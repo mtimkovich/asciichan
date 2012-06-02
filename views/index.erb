@@ -8,6 +8,10 @@
   <body>
     <h1>/ascii/</h1>
 
+    <% if not @gmap_img.nil? %>
+      <img id="map" src="<%= @gmap_img %>">
+    <% end %>
+
     <form method="post">
       <table>
         <tr>

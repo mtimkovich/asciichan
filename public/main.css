@@ -7,3 +7,9 @@ textarea {
 #error {
   color: red;
 }
+
+#map {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
