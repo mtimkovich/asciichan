@@ -1,6 +1,4 @@
 require 'sinatra'
-require 'net/http'
-require 'json'
 
 require_relative 'models'
 require_relative 'helper'

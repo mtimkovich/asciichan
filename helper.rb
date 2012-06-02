@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 def get_gmaps_img(points)
   gmaps_url = 'http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&'
 
